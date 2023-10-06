@@ -1,0 +1,21 @@
+version: "3.8"
+volumes:
+  todo-app-data:
+services:
+  postgres-todo:
+    image: postgres:16.0-bullseye
+    container_name: "postgres-todo-app"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=todo_app_db
+      - POSTGRES_PASSWORD=todo_app_pass
+      - POSTGRES_USER=todo_app_user
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - TZ=GMT-3
+    volumes:
+      - "todo-app-data:/var/lib/postgresql/data"
+    restart: always
+networks:
+  postgres:
+    driver: bridge
