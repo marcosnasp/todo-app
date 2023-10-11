@@ -1,6 +1,7 @@
 package com.example.todoapp.service;
 
-import com.example.todoapp.domain.TodoItems;
+import com.example.todoapp.dto.TodoItemsDTO;
+import com.example.todoapp.mapper.TodoItemsMapper;
 import com.example.todoapp.repository.TodoItemsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ public class TodoItemsService {
         this.todoItemsRepository = todoItemsRepository;
     }
 
-    public Page<TodoItems> findAll(Pageable pageable) {
-        return todoItemsRepository.findAll(pageable);
+    public Page<TodoItemsDTO> findAll(Pageable pageable) {
+        return todoItemsRepository.findAll(pageable).map(TodoItemsMapper.MAPPER::fromTodoItems);
     }
 }

@@ -2,14 +2,15 @@ package com.example.todoapp.mapper;
 
 import com.example.todoapp.domain.User;
 import com.example.todoapp.dto.UserDTO;
-import org.springframework.stereotype.Service;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-import java.util.function.Function;
+@Mapper
+public interface UserMapper {
 
-@Service
-public class UserMapper implements Function<User, UserDTO> {
-    @Override
-    public UserDTO apply(User user) {
-        return new UserDTO(user.getUsername(), user.getEmail());
-    }
+    UserMapper MAPPER = Mappers.getMapper(UserMapper.class);
+
+    User toUser(UserDTO userDTO);
+
+    UserDTO fromUser(User user);
 }

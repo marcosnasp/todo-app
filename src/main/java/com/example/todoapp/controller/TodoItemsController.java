@@ -1,6 +1,6 @@
 package com.example.todoapp.controller;
 
-import com.example.todoapp.domain.TodoItems;
+import com.example.todoapp.dto.TodoItemsDTO;
 import com.example.todoapp.service.TodoItemsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,8 @@ public class TodoItemsController {
     }
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<TodoItems>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<TodoItemsDTO>> findAll(Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(todoItemsService.findAll(pageable));
     }
+
 }
